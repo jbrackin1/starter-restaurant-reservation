@@ -1,4 +1,6 @@
 import React, {useState}  from 'react'
+import {useHistory} from "react-router-dom";
+
 
 const NewReservation = () => {
   const defaultReservation = {
@@ -10,10 +12,10 @@ const NewReservation = () => {
     people: 0,
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (e) => {
 
   }
-  
+
   const [reservation, setReservation] = useState({...defaultReservation});
 }
 
