@@ -1,6 +1,7 @@
 import React, {useState}  from 'react'
 import {useHistory} from "react-router-dom";
 import ReservationForm from './ReservationForm';
+import { createReservation } from '../utils/api';
 
 const NewReservation = () => {
   const defaultReservation = {
@@ -21,8 +22,9 @@ const NewReservation = () => {
     });
   };
 
+  const history = useHistory();
   const handleSubmit = async (e) => {
-
+    const controller = new AbortController();
       reservation.people = Number(reservation.people);
       await createReservation(reservation, controller.signal);
       const date = reservation.reservation_date;

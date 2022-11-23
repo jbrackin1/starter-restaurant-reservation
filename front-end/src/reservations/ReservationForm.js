@@ -2,6 +2,8 @@ import React from 'react'
 import {useHistory} from 'react-router-dom'
 
 const ReservationForm = () => {
+
+    const history = useHistory();
     return (
           <form>
             <fieldset>
