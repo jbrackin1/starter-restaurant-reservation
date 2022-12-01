@@ -17,15 +17,15 @@ function search(number){
     .orderBy("reservation_date");
 }
 
-function read(id){
-    return knex("reservations").select("*").where({id}).first();
+function read(reservation_id){
+    return knex("reservations").select("*").where({reservation_id}).first();
 }
 
 function create(reservation){
     return knex("reservations")
     .insert(reservation)
     .returning("*")
-    .then((record) => record[0])
+    .then((createdRecords) => createdRecords[0])
 }
 
 function update(updatedReservation){
