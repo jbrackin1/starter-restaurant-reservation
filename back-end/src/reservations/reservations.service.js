@@ -1,54 +1,55 @@
-const knex = require("../db/connection")
+const knex = require("../db/connection.js");
 
-function list(){
-    return knex("reservations")
+function list(reservation_date) {
+  return knex("reservations")
     .select("*")
-    .where({reservation_date})
-    .where({status: "finished"})
+    .where({ reservation_date })
+    .whereNot({ status: "finished" })
     .orderBy("reservation_time");
 }
 
-function search(number){
-    return knex("reservations")
+function search(mobile_number) {
+  return knex("reservations")
     .whereRaw(
-        "translate(number, '() -', '') like ?",
-        `%${number.replace(/\D/g, "")}%`
+      "translate(mobile_number, '() -', '') like ?",
+      `%${mobile_number.replace(/\D/g, "")}%`
     )
     .orderBy("reservation_date");
 }
 
-function read(reservation_id){
-    return knex("reservations").select("*").where({reservation_id}).first();
+function read(reservation_id) {
+  return knex("reservations").select("*").where({ reservation_id }).first();
 }
 
-function create(reservation){
-    return knex("reservations")
+function create(reservation) {
+  return knex("reservations")
     .insert(reservation)
     .returning("*")
-    .then((createdRecords) => createdRecords[0])
+    .then((createdRecords) => createdRecords[0]);
 }
 
-function update(updatedReservation){
-    return knex("reservations")
+function update(updatedRes) {
+  console.log("updatedRes", updatedRes);
+  return knex("reservations")
     .select("*")
-    .where({reservation_id: updatedReservation.reservation_id})
-    .update(updatedReservation, "*")
-    .then((record) => record[0]);
+    .where({ reservation_id: updatedRes.reservation_id })
+    .update(updatedRes, "*")
+    .then((createdRecords) => createdRecords[0]);
 }
 
-function updateStatus(id, status){
-    return knex("reservations")
+function updateStatus(reservation_id, status) {
+  return knex("reservations")
     .select("*")
-    .where({id})
-    .update({status: status}, "*")
-    .then((record) => record[0])
+    .where({ reservation_id })
+    .update({ status: status }, "*")
+    .then((createdRecords) => createdRecords[0]);
 }
 
 module.exports = {
-    list,
-    search,
-    read,
-    create,
-    update,
-    updateStatus
-}
+  list,
+  search,
+  read,
+  create,
+  update,
+  updateStatus,
+};

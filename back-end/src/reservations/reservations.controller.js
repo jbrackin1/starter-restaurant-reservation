@@ -75,6 +75,7 @@ async function reservationExists(req, res, next) {
 
 async function read(req, res) {
   const data = res.locals.reservation;
+  // console.log(data);
   res.json({ data });
 }
 
