@@ -8,6 +8,15 @@ function list(reservation_date) {
     .orderBy("reservation_time");
 }
 
+function listByDate(reservation_date) {
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_date })
+    .whereNotIn("status", ["finished", "cancelled"])
+    .orderBy("reservations.reservation_time");
+}
+
+
 function search(mobile_number) {
   return knex("reservations")
     .whereRaw(
@@ -52,4 +61,5 @@ module.exports = {
   create,
   update,
   updateStatus,
+  listByDate
 };

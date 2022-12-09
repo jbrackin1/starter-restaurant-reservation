@@ -30,8 +30,15 @@ function hasValidName(req, res, next) {
 
 function hasValidCapacity(req, res, next) {
   const capacity = req.body.data.capacity;
+  const table = req.body.data;
 
-  
+  if (typeof table["capacity"] !== "number") {
+    return next({
+      status: 400,
+      message: "capacity must be a number greater than 0",
+    });
+}
+
   if (capacity < 1 || isNaN(capacity)) {
     return next({
       status: 400,

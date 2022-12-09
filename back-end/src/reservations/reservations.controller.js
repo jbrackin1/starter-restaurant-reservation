@@ -96,12 +96,23 @@ function hasOnlyValidProperties(req, res, next) {
 }
 
 async function list(req, res) {
-  const date = req.query.date;
-  const mobile_number = req.query.number;
-  const data = await (date
-    ? reservationsService.list(date)
-    : reservationsService.search(mobile_number));
-  res.json({ data });
+  // const date = req.query.date;
+  // const mobile_number = req.query.number;
+  // const data = await (date
+  //   ? reservationsService.list(date)
+  //   : reservationsService.search(mobile_number));
+  // res.json({ data });
+  const { date, mobile_number } = req.query;
+  let reservations;
+  if (mobile_number) {
+    reservations = await reservationsService.search(mobile_number);
+  } else {
+    reservations = date ? await reservationsService.listByDate(date) : await reservationsService.list();
+  }
+  res.json({
+    data: reservations,
+});
+
 }
 
 function hasValidDate(req, res, next) {
