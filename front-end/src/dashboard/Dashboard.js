@@ -3,8 +3,8 @@ import { listReservations, listTables, finishTable, updateStatus } from "../util
 import ErrorAlert from "../layout/ErrorAlert";
 import { next, previous, today } from "../utils/date-time";
 import { useHistory } from "react-router-dom";
-import ReservationsList from "../reservation/ReservationsList";
-import TablesList from "../tables/TablesList";
+import ReservationsList from "../reservations/ReservationList";
+import TablesList from "../tables/TablesList"
 import moment from "moment";
 
 /**

@@ -16,6 +16,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "moment": "^2.29.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
@@ -27,7 +28,6 @@
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "eject": "react-scripts eject",
-  
     "test": "npx cross-env CI=true npm run test:run",
     "test:run": "run-s test:unit test:e2e",
     "test:1": "run-p -l -r test:start:* \"test:e2e:run -- us-01\"",
