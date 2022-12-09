@@ -7,7 +7,7 @@ const baseURL = process.env.BASE_URL || "http://localhost:3000";
 
 
 const onPageConsole = (msg) =>{
-  console.log("anything")
+  // console.log("anything")
   Promise.all(msg.args().map((event) => 
   
   event.jsonValue())).then((eventJson) =>
@@ -21,14 +21,14 @@ describe("US-01 - Create and list reservations - E2E", () => {
   let browser;
 
   beforeAll(async () => {
-    console.log("anything2")
+    // console.log("anything2")
     await fsPromises.mkdir("./.screenshots", { recursive: true });
     setDefaultOptions({ timeout: 1000 });
     browser = await puppeteer.launch();
   });
 
   beforeEach(async () => {
-    console.log("anything3")
+    // console.log("anything3")
     page = await browser.newPage();
     page.on("console", onPageConsole);
     await page.setViewport({ width: 1920, height: 1080 });
@@ -40,7 +40,7 @@ describe("US-01 - Create and list reservations - E2E", () => {
   });
 
   describe("/reservations/new page", () => {
-    console.log("anything4")
+    // console.log("anything4")
     test("filling and submitting form creates a new reservation and then displays the dashboard for the reservation date", async () => {
       const lastName = Date.now().toString(10);
 
