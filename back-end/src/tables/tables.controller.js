@@ -1,4 +1,4 @@
-const tablesService = require("./tables.service");
+const tablesService = require("./tables.service.js");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
 const reservationsController = require("../reservations/reservations.controller");
@@ -31,6 +31,7 @@ function hasValidName(req, res, next) {
 function hasValidCapacity(req, res, next) {
   const capacity = req.body.data.capacity;
 
+  
   if (capacity < 1 || isNaN(capacity)) {
     return next({
       status: 400,
