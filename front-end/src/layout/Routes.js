@@ -2,11 +2,14 @@ import React from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
+import ReservationNew from "../reservations/ReservationNew";
+import ReservationSeat from "../reservations/ReservationSeat";
+import ReservationEdit from "../reservations/ReservationEdit";
+import TableNew from "../tables/TableNew";
+import Search from "../search/Search";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import NewReservation from "../reservations/ReservationNew";
-import ReservationForm from "../reservations/ReservationForm";
-
+import useQuery from "../utils/useQuery";
 
 /**
  * Defines all the routes for the application.
@@ -16,6 +19,9 @@ import ReservationForm from "../reservations/ReservationForm";
  * @returns {JSX.Element}
  */
 function Routes() {
+  const query = useQuery();
+  const date = query.get("date");
+
   return (
     <Switch>
       <Route exact={true} path="/">
@@ -25,10 +31,22 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/dashboard">
-        <Dashboard date={today()} />
+        <Dashboard date={date || today()} />
       </Route>
-      <Route exact={true} path="/reservations/new">
-        <ReservationForm/>
+      <Route path="/reservations/new">
+        <ReservationNew />
+      </Route>
+      <Route path="/reservations/:reservation_id/seat">
+        <ReservationSeat />
+      </Route>
+      <Route path="/reservations/:reservation_id/edit">
+        <ReservationEdit />
+      </Route>
+      <Route path="/tables/new">
+        <TableNew />
+      </Route>
+      <Route path="/search">
+        <Search />
       </Route>
       <Route>
         <NotFound />
