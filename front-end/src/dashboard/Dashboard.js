@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, listTables, finishTable, updateStatus } from "../utils/api";
+import { listReservations, listTables, clearTable, updateStatus } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { next, previous, today } from "../utils/date-time";
 import { useHistory } from "react-router-dom";
@@ -36,18 +36,26 @@ function Dashboard({ date }) {
     return () => abortController.abort();
   }
 
-  async function finishHandler(table_id) {
+    async function finishHandler(table_id) {
+    
     const abortController = new AbortController();
     const result = window.confirm(
       "Is this table ready to seat new guests? This cannot be undone."
     );
-
-    if (result) {
-      await finishTable(table_id, abortController.signal);
+    
+    if (result) {  
+      try {
+      await clearTable(table_id, abortController.signal);
       loadDashboard();
+      }
+      
+      catch {
+      console.error();
+      }
+      return () => abortController.abort();
     }
 
-    return () => abortController.abort();
+    
   }
 
   const cancelHandler = async (event) => {
