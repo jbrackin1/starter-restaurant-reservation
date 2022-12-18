@@ -170,6 +170,7 @@ function isBooked(req, res, next) {
 async function create(req, res) {
   const data = await reservationsService.create(req.body.data);
   res.status(201).json({ data });
+
 }
 
 function hasValidStatus(req, res, next) {
@@ -207,7 +208,7 @@ async function update(req, res) {
 }
 
 async function updateStatus(req, res) {
-  const { status } = res.locals;
+  const { data: { status } = {} } = req.body;
   const { reservation_id } = res.locals.reservation;
   const data = await reservationsService.updateStatus(reservation_id, status);
   res.status(200).json({ data });

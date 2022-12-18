@@ -18,7 +18,7 @@
 //   }
 
 
-//   const rows = tables.map((table) => {
+//   const tableRows = tables.map((table) => {
 //       return (
 //         <div key={table.table_id} className="col-sm-12 col-md-6 col-lg-4">
 //           <div className="card mb-1">
@@ -74,10 +74,16 @@ function TablesList({tables}) {
     const tablesRows = tables.map(({reservation_id, table_id,capacity, table_name})=>{
         return(
             <tr key={table_id}>
-                <th scope="row">{table_name}</th>
+            <th scope="row">{table_name}</th>
             <td>{capacity}</td>
             <td data-table-id-status={table_id}>{reservation_id?"Occupied":"Free"}</td>
-            <td>{reservation_id&&<button onClick={()=>handleClear(table_id)} type="button" className="btn btn-dark" data-table-id-finish={table_id}>Finish</button>}</td>
+            <td>{reservation_id&&
+            <button onClick={()=>handleClear(table_id)} 
+            type="button"
+            className="btn btn-alert"  
+            // className="btn btn-dark" 
+            data-table-id-finish={table_id}>Finish
+            </button>}</td>
             </tr>
         )
     })

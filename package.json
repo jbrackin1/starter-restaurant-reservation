@@ -49,6 +49,7 @@
   "author": "Jerod Brackin",
   "license": "UNLICENSED",
   "dependencies": {
+    "knex": "^2.3.0",
     "moment": "^2.29.4"
   }
 }

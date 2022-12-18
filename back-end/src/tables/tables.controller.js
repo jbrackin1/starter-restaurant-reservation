@@ -28,24 +28,27 @@ function hasValidName(req, res, next) {
   next();
 }
 
+// function hasValidCapacity(req, res, next) {
+//   const capacity = req.body.data.capacity;
+
+//   if (capacity < 1 || isNaN(capacity)) {
+//     return next({
+//       status: 400,
+//       message: `Invalid capacity`,
+//     });
+//   }
+//   next();
+// }
+
 function hasValidCapacity(req, res, next) {
-  const capacity = req.body.data.capacity;
-  const table = req.body.data;
-
-  if (typeof table["capacity"] !== "number") {
-    return next({
-      status: 400,
-      message: "capacity must be a number greater than 0",
-    });
-}
-
-  if (capacity < 1 || isNaN(capacity)) {
-    return next({
-      status: 400,
-      message: `Invalid capacity`,
-    });
-  }
-  next();
+  const { data: { capacity } = {} } = req.body;
+ if (capacity.length || capacity === 0) {
+   return next({
+     status: 400,
+     message: "capacity must be a number greater than 0",
+   });
+ }
+ next();
 }
 
 function hasSufficientCapacity(req, res, next) {
@@ -82,7 +85,7 @@ function tableIsNotSeated(req, res, next) {
 }
 
 function tableIsOccupied(req, res, next) {
-  if (!res.locals.table.occupied) {
+  if (res.locals.table.occupied) {
     return next({
       status: 400,
       message: `Table is not occupied`,
