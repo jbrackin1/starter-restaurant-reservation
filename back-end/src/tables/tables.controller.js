@@ -84,14 +84,25 @@ function tableIsNotSeated(req, res, next) {
   next();
 }
 
+// function tableIsOccupied(req, res, next) {
+//   if (res.locals.table.occupied) {
+//     return next({
+//       status: 400,
+//       message: `Table is not occupied`,
+//     });
+//   }
+//   next();
+// }
+
 function tableIsOccupied(req, res, next) {
-  if (res.locals.table.occupied) {
-    return next({
-      status: 400,
-      message: `Table is not occupied`,
-    });
-  }
-  next();
+  const table  = res.locals.table;
+ if (table.reservation_id === null) {
+   return next({
+     status: 400,
+     message: `Table is not occupied`,
+   });
+ }
+ next();
 }
 
 async function list(req, res) {
