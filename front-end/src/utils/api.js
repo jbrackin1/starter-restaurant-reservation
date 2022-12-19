@@ -2,6 +2,12 @@
  * Defines the base URL for the API.
  * The default values is overridden by the `API_BASE_URL` environment variable.
  */
+const express=require("express");
+const cors=require("cors");
+
+const app=express();
+app.use(cors());
+
 import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-time";
 
