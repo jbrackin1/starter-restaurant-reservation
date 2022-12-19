@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "build": "react-scripts ",
     "eject": "react-scripts eject",
     "test": "npx cross-env CI=true npm run test:run",
     "test:run": "run-s test:unit test:e2e",
